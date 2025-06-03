@@ -16,6 +16,7 @@ const authCMSRouter = require("./app/api/v1/auth/router");
 const ordersRouter = require("./app/api/v1/orders/router");
 const participantRouter = require("./app/api/v1/participants/router");
 const paymentsRouter = require("./app/api/v1/payments/router");
+const userRefreshTokenRouter = require("./app/api/v1/userRefreshToken/router");
 
 // middlewares
 const notFoundMiddleware = require("./app/middlewares/not-found");
@@ -31,9 +32,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Welcome to API ",
-  });
+    res.status(200).json({
+        message: "Welcome to API ",
+    });
 });
 
 app.use(`${v1}/cms`, categoriesRouter);
@@ -57,6 +58,9 @@ app.use(`${v1}/cms`, ordersRouter);
 
 // Payments
 app.use(`${v1}/cms`, paymentsRouter);
+
+// Refresh Token
+app.use(`${v1}/cms`, userRefreshTokenRouter);
 
 // Participant
 app.use(`${v1}`, participantRouter);
